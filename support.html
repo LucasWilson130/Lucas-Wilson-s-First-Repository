@@ -3,17 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Number Array</title>
+    <title>Sorted Number Array</title>
   </head>
   <body>
-    <h1>Number Array</h1>
+    <h1>Sorted Number Array (Ascending)</h1>
     <p>
-      The following array of numbers has been created and printed to the
-      console:
+      The following array of numbers has been sorted in ascending order and
+      printed to the console:
     </p>
     <ul id="numberList">
       <script>
         let numbers = [11, 5, 8, 3, 25, 16, 31, 45, 14, 20];
+        numbers.sort((a, b) => a - b); // Sort in ascending order
         let list = document.getElementById("numberList");
         numbers.forEach((number) => {
           let listItem = document.createElement("li");
