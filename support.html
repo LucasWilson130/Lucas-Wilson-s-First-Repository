@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sorted Number Array</title>
-  </head>
-  <body>
-    <h1>Sorted Number Array (Ascending)</h1>
-    <p>
-      The following array of numbers has been sorted in ascending order and
-      printed to the console:
-    </p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updated & Sorted Number Array</title>
+</head>
+<body>
+    <h1>Updated & Sorted Number Array (Ascending)</h1>
+    <p>The following array of numbers has been updated with new values, sorted in ascending order, and printed to the console:</p>
     <ul id="numberList">
-      <script>
-        let numbers = [11, 5, 8, 3, 25, 16, 31, 45, 14, 20];
-        numbers.sort((a, b) => a - b); // Sort in ascending order
-        let list = document.getElementById("numberList");
-        numbers.forEach((number) => {
-          let listItem = document.createElement("li");
-          listItem.textContent = number;
-          list.appendChild(listItem);
-        });
-      </script>
+        <script>
+            let numbers = [11, 5, 8, 3, 25, 16, 31, 45, 14, 20];
+            numbers.push(19, 23, 30); // Add the new numbers
+            numbers.sort((a, b) => a - b); // Sort in ascending order
+            let list = document.getElementById('numberList');
+            numbers.forEach(number => {
+                let listItem = document.createElement('li');
+                listItem.textContent = number;
+                list.appendChild(listItem);
+            });
+        </script>
     </ul>
-  </body>
+</body>
 </html>
