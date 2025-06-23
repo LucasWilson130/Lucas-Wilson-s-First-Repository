@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Updated & Sorted Number Array</title>
+    <title>Modified & Sorted Number Array</title>
 </head>
 <body>
-    <h1>Updated & Sorted Number Array (Ascending)</h1>
-    <p>The following array of numbers has been updated with new values, sorted in ascending order, and printed to the console:</p>
+    <h1>Modified & Sorted Number Array (Ascending)</h1>
+    <p>The following array of numbers has been modified (numbers removed), sorted in ascending order, and printed to the console:</p>
     <ul id="numberList">
         <script>
             let numbers = [11, 5, 8, 3, 25, 16, 31, 45, 14, 20];
-            numbers.push(19, 23, 30); // Add the new numbers
+            numbers.push(19, 23, 30); // Add the new numbers (from previous instruction)
+
+            // Remove the numbers 8 and 31
+            numbers = numbers.filter(number => number !== 8 && number !== 31);
+
             numbers.sort((a, b) => a - b); // Sort in ascending order
             let list = document.getElementById('numberList');
             numbers.forEach(number => {
