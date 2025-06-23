@@ -3,23 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Array Operations & Search</title>
+    <title>Array Operations & Search Algorithms</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        ul { list-style-type: decimal; }
+        input[type="number"] { padding: 8px; margin-right: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #searchResultSequential, #searchResultBinary {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .found { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .notFound { background-color: #ffeeba; color: #856404; border: 1px solid #ffc107; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
 </head>
 <body>
-    <h1>Array Operations & Sequential Search</h1>
+    <h1>Array Operations & Search Algorithms</h1>
 
     <h2>Current Array (Modified & Sorted)</h2>
-    <p>The following array of numbers has been modified (numbers removed), sorted in ascending order, and printed to the console:</p>
+    <p>The array has been initially defined, new numbers added (19, 23, 30), numbers 8 and 31 removed, and then sorted in ascending order:</p>
     <ul id="numberList">
         <script>
             let numbers = [11, 5, 8, 3, 25, 16, 31, 45, 14, 20];
-            numbers.push(19, 23, 30); // Add the new numbers (from previous instruction)
-
-            // Remove the numbers 8 and 31
-            numbers = numbers.filter(number => number !== 8 && number !== 31);
-
+            numbers.push(19, 23, 30); // Add the new numbers
+            numbers = numbers.filter(number => number !== 8 && number !== 31); // Remove specified numbers
             numbers.sort((a, b) => a - b); // Sort in ascending order
 
+            // Populate the HTML list with the current array
             let list = document.getElementById('numberList');
             numbers.forEach(number => {
                 let listItem = document.createElement('li');
@@ -27,7 +41,7 @@
                 list.appendChild(listItem);
             });
 
-            // Print the sorted array to the console (for developer view)
+            // Print the current array to the console for developers
             console.log("Current Array:", numbers);
 
             // --- Sequential Search Function ---
@@ -40,28 +54,82 @@
                 return -1; // Return -1 if not found
             }
 
-            // --- HTML Elements and Event Listener for Search ---
-            window.onload = function() {
-                const searchInput = document.getElementById('searchInput');
-                const searchButton = document.getElementById('searchButton');
-                const searchResult = document.getElementById('searchResult');
+            // --- Binary Search Function ---
+            // Requires the array to be sorted
+            function binarySearch(arr, target) {
+                /*
+                 * How it works: Binary search repeatedly divides the search interval in half.
+                 * It starts with the `left` pointer at the beginning of the array and the `right` pointer at the end.
+                 * In each iteration, it calculates the `mid` index.
+                 * If the element at `mid` is the `target`, it returns `mid`.
+                 * If the element at `mid` is less than the `target`, it means the `target` must be in the right half, so it moves `left` to `mid + 1`.
+                 * If the element at `mid` is greater than the `target`, it means the `target` must be in the left half, so it moves `right` to `mid - 1`.
+                 * The loop continues as long as `left` is less than or equal to `right`. If `left` becomes greater than `right`, it means the target was not found, and it returns `-1`.
+                 */
+                let left = 0;
+                let right = arr.length - 1;
 
-                searchButton.addEventListener('click', function() {
-                    const searchTerm = parseInt(searchInput.value); // Get input as a number
+                while (left <= right) {
+                    let mid = Math.floor((left + right) / 2); // Calculate middle index
+
+                    if (arr[mid] === target) {
+                        return mid; // Target found at mid index
+                    } else if (arr[mid] < target) {
+                        left = mid + 1; // Target is in the right half
+                    } else { // arr[mid] > target
+                        right = mid - 1; // Target is in the left half
+                    }
+                }
+                return -1; // Target not found
+            }
+
+            // --- Event Listeners and HTML Interaction (Runs after page loads) ---
+            window.onload = function() {
+                // Sequential Search Elements
+                const searchInputSequential = document.getElementById('searchInputSequential');
+                const searchButtonSequential = document.getElementById('searchButtonSequential');
+                const searchResultSequential = document.getElementById('searchResultSequential');
+
+                searchButtonSequential.addEventListener('click', function() {
+                    const searchTerm = parseInt(searchInputSequential.value);
                     if (isNaN(searchTerm)) {
-                        searchResult.textContent = "Please enter a valid number.";
-                        searchResult.style.color = "red";
+                        searchResultSequential.textContent = "Please enter a valid number.";
+                        searchResultSequential.className = 'error';
                         return;
                     }
 
                     const index = sequentialSearch(numbers, searchTerm);
 
                     if (index !== -1) {
-                        searchResult.textContent = `Number ${searchTerm} found at index ${index}.`;
-                        searchResult.style.color = "green";
+                        searchResultSequential.textContent = `Number ${searchTerm} found at index ${index} using Sequential Search.`;
+                        searchResultSequential.className = 'found';
                     } else {
-                        searchResult.textContent = `Number ${searchTerm} not found in the array.`;
-                        searchResult.style.color = "orange";
+                        searchResultSequential.textContent = `Number ${searchTerm} not found in the array using Sequential Search.`;
+                        searchResultSequential.className = 'notFound';
+                    }
+                });
+
+                // Binary Search Elements
+                const searchInputBinary = document.getElementById('searchInputBinary');
+                const searchButtonBinary = document.getElementById('searchButtonBinary');
+                const searchResultBinary = document.getElementById('searchResultBinary');
+
+                searchButtonBinary.addEventListener('click', function() {
+                    const searchTerm = parseInt(searchInputBinary.value);
+                    if (isNaN(searchTerm)) {
+                        searchResultBinary.textContent = "Please enter a valid number.";
+                        searchResultBinary.className = 'error';
+                        return;
+                    }
+
+                    const index = binarySearch(numbers, searchTerm);
+
+                    if (index !== -1) {
+                        searchResultBinary.textContent = `Number ${searchTerm} found at index ${index} using Binary Search.`;
+                        searchResultBinary.className = 'found';
+                    } else {
+                        searchResultBinary.textContent = `Number ${searchTerm} not found in the array using Binary Search.`;
+                        searchResultBinary.className = 'notFound';
                     }
                 });
             };
@@ -69,10 +137,16 @@
     </ul>
 
     <h2>Sequential Search</h2>
-    <p>Enter a number to search for in the array:</p>
-    <input type="number" id="searchInput" placeholder="Enter a number">
-    <button id="searchButton">Search</button>
-    <p id="searchResult"></p>
+    <p>Enter a number to search for (using Sequential Search):</p>
+    <input type="number" id="searchInputSequential" placeholder="Enter a number">
+    <button id="searchButtonSequential">Search Sequentially</button>
+    <p id="searchResultSequential"></p>
+
+    <h2>Binary Search</h2>
+    <p>Enter a number to search for (using Binary Search - *requires array to be sorted*):</p>
+    <input type="number" id="searchInputBinary" placeholder="Enter a number">
+    <button id="searchButtonBinary">Search Binarily</button>
+    <p id="searchResultBinary"></p>
 
 </body>
 </html>
