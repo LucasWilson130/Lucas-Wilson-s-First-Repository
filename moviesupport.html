@@ -1,74 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Movie Details</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #f0f4f8; /* Light blue-gray background */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        padding: 20px;
-        box-sizing: border-box;
-      }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
     </style>
-  </head>
-  <body>
-    <div
-      class="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full mx-auto text-center border-t-4 border-indigo-500"
-    >
-      <h1 class="text-3xl font-bold text-gray-800 mb-6">Movie Details</h1>
-      <div id="movie-details" class="text-lg text-gray-700">
-        <!-- Movie details will be loaded here by JavaScript -->
-        <p>
-          <span class="font-medium text-gray-900">Title:</span>
-          <span id="movie-title"></span>
-        </p>
-        <p>
-          <span class="font-medium text-gray-900">Year:</span>
-          <span id="movie-year"></span>
-        </p>
-      </div>
+</head>
+<body>
+    <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full mx-auto text-center border-t-4 border-indigo-500">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Movie Details</h1>
+        <div id="movie-details" class="text-lg text-gray-700 space-y-2">
+            <!-- Movie details will be loaded here by JavaScript -->
+            <p><span class="font-medium text-gray-900">Title:</span> <span id="movie-title"></span></p>
+            <p><span class="font-medium text-gray-900">Year:</span> <span id="movie-year"></span></p>
+            <p><span class="font-medium text-gray-900">Rating:</span> <span id="movie-rating"></span></p>
+            <p class="text-left"><span class="font-medium text-gray-900 block mb-1">Summary:</span> <span id="movie-summary" class="block"></span></p>
+        </div>
     </div>
 
     <script>
-      // Define the myMovie object
-      const myMovie = {
-        Title: "The longest day",
-        Year: 1964,
-      };
+        // Define the myMovie object with new properties
+        const myMovie = {
+            Title: "The longest day",
+            Year: 1964,
+            Rating: 5, // Added new property
+            Summary: "World War II movie about the Normandy landings" // Added new property
+        };
 
-      // Function to display movie details on the page
-      function displayMovieDetails() {
-        // Get the HTML elements by their IDs
-        const movieTitleElement = document.getElementById("movie-title");
-        const movieYearElement = document.getElementById("movie-year");
+        // Function to display movie details on the page
+        function displayMovieDetails() {
+            // Get the HTML elements by their IDs
+            const movieTitleElement = document.getElementById('movie-title');
+            const movieYearElement = document.getElementById('movie-year');
+            const movieRatingElement = document.getElementById('movie-rating'); // New element
+            const movieSummaryElement = document.getElementById('movie-summary'); // New element
 
-        // Check if elements exist before updating
-        if (movieTitleElement && movieYearElement) {
-          // Set the text content of the elements to the movie properties
-          movieTitleElement.textContent = myMovie.Title;
-          movieYearElement.textContent = myMovie.Year;
-        } else {
-          console.error(
-            "Could not find one or both of the movie detail elements."
-          );
+            // Check if elements exist before updating
+            if (movieTitleElement && movieYearElement && movieRatingElement && movieSummaryElement) {
+                // Set the text content of the elements to the movie properties
+                movieTitleElement.textContent = myMovie.Title;
+                movieYearElement.textContent = myMovie.Year;
+                movieRatingElement.textContent = myMovie.Rating + ' / 5'; // Display rating
+                movieSummaryElement.textContent = myMovie.Summary; // Display summary
+            } else {
+                console.error("Could not find one or more of the movie detail elements.");
+            }
         }
-      }
 
-      // Call the function when the window loads to ensure the DOM is ready
-      window.onload = displayMovieDetails;
+        // Call the function when the window loads to ensure the DOM is ready
+        window.onload = displayMovieDetails;
     </script>
-  </body>
+</body>
 </html>
