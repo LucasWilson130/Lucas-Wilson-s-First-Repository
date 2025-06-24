@@ -34,12 +34,12 @@
     </div>
 
     <script>
-        // Define the myMovie object with new properties
+        // Define the myMovie object with updated properties
         const myMovie = {
             Title: "The longest day",
-            Year: 1964,
-            Rating: 5, // Added new property
-            Summary: "World War II movie about the Normandy landings" // Added new property
+            Year: 1962, // Updated year
+            Rating: 4, // Updated rating
+            Summary: "World War II movie about the Normandy landings"
         };
 
         // Function to display movie details on the page
@@ -47,8 +47,8 @@
             // Get the HTML elements by their IDs
             const movieTitleElement = document.getElementById('movie-title');
             const movieYearElement = document.getElementById('movie-year');
-            const movieRatingElement = document.getElementById('movie-rating'); // New element
-            const movieSummaryElement = document.getElementById('movie-summary'); // New element
+            const movieRatingElement = document.getElementById('movie-rating');
+            const movieSummaryElement = document.getElementById('movie-summary');
 
             // Check if elements exist before updating
             if (movieTitleElement && movieYearElement && movieRatingElement && movieSummaryElement) {
@@ -56,7 +56,7 @@
                 movieTitleElement.textContent = myMovie.Title;
                 movieYearElement.textContent = myMovie.Year;
                 movieRatingElement.textContent = myMovie.Rating + ' / 5'; // Display rating
-                movieSummaryElement.textContent = myMovie.Summary; // Display summary
+                movieSummaryElement.textContent = myMovie.Summary;
             } else {
                 console.error("Could not find one or more of the movie detail elements.");
             }
