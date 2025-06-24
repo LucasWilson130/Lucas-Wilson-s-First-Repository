@@ -29,17 +29,17 @@
             <p><span class="font-medium text-gray-900">Title:</span> <span id="movie-title"></span></p>
             <p><span class="font-medium text-gray-900">Year:</span> <span id="movie-year"></span></p>
             <p><span class="font-medium text-gray-900">Rating:</span> <span id="movie-rating"></span></p>
-            <p class="text-left"><span class="font-medium text-gray-900 block mb-1">Summary:</span> <span id="movie-summary" class="block"></span></p>
+            <!-- Summary property and its display element have been removed -->
         </div>
     </div>
 
     <script>
-        // Define the myMovie object with updated properties
+        // Define the myMovie object with the Summary property removed
+        // Also reverted Year back to 1964 as per user's prompt
         const myMovie = {
             Title: "The longest day",
-            Year: 1962, // Updated year
-            Rating: 4, // Updated rating
-            Summary: "World War II movie about the Normandy landings"
+            Year: 1964, // Reverted to 1964
+            Rating: 4 // Kept at 4 as per previous request
         };
 
         // Function to display movie details on the page
@@ -48,15 +48,14 @@
             const movieTitleElement = document.getElementById('movie-title');
             const movieYearElement = document.getElementById('movie-year');
             const movieRatingElement = document.getElementById('movie-rating');
-            const movieSummaryElement = document.getElementById('movie-summary');
+            // movieSummaryElement is no longer needed as the property is removed
 
             // Check if elements exist before updating
-            if (movieTitleElement && movieYearElement && movieRatingElement && movieSummaryElement) {
+            if (movieTitleElement && movieYearElement && movieRatingElement) {
                 // Set the text content of the elements to the movie properties
                 movieTitleElement.textContent = myMovie.Title;
                 movieYearElement.textContent = myMovie.Year;
                 movieRatingElement.textContent = myMovie.Rating + ' / 5'; // Display rating
-                movieSummaryElement.textContent = myMovie.Summary;
             } else {
                 console.error("Could not find one or more of the movie detail elements.");
             }
