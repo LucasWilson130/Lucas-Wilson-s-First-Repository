@@ -1,4 +1,4 @@
-// This script creates an array with the specified numbers.
+// This script creates an array with the specified numbers and then sorts it in ascending order.
 
 /**
  * An array containing a list of numbers.
@@ -6,13 +6,18 @@
  */
 const numbers = [11, 5, 8, 3, 25, 16, 31, 45, 14, 20];
 
-// You can log the array to the console to see its content.
-console.log("The array of numbers is:", numbers);
+console.log("Original array:", numbers);
 
-// You can also access individual elements, for example, the first element:
-// console.log("The first number is:", numbers[0]); // Output: 11
+/**
+ * Sorts the array of numbers in ascending order (smallest to largest).
+ * The sort() method with a compare function (a - b) is used for numerical sorting.
+ * If a - b is negative, 'a' comes before 'b'.
+ * If a - b is positive, 'b' comes before 'a'.
+ * If a - b is zero, their order remains unchanged.
+ */
+numbers.sort((a, b) => a - b);
 
-// Or iterate through the array:
-// numbers.forEach(number => {
-//   console.log(number);
-// });
+console.log("Sorted array (ascending):", numbers);
+
+// You can still access individual elements or iterate through the array as before.
+// console.log("The first number in the sorted array is:", numbers[0]);
